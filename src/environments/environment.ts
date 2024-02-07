@@ -1,4 +1,4 @@
 export const environment = {
-  production: true,
-  apiUrl: 'http://localhost:5000',
+    production: true,
+    apiUrl: 'https://rcrft-backend.ddns.net',
 };
