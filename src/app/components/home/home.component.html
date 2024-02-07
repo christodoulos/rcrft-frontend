@@ -1,0 +1,15 @@
+<div class="container">
+    <h1 class="text-center fs-2 my-5">Welcome to RCRFT Tool</h1>
+    <div class="d-flex justify-content-center">
+        <asl-google-signin-button
+            *ngIf="!currentUser()"
+            type="standard"
+            size="large"
+            shape="circle"
+            [width]="400"
+            logo_alignment="center"
+            theme="filled_blue"
+        >
+        </asl-google-signin-button>
+    </div>
+</div>
