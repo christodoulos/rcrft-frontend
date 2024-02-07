@@ -15,19 +15,23 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" routerLink="/home" routerLinkActive="active">Home</a>
                 </li>
+                <li class="nav-item" *ngIf="currentUser()">
+                    <a class="nav-link" aria-current="page" routerLink="/indicators" routerLinkActive="active">Indicators</a>
+                </li>
             </ul>
 
-            <div>
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item me-5" *ngIf="currentUser()">
-                        <img [src]="currentUser().photoUrl" alt="user photo" />
-                        <a class="nav-link text-light">Welcome, {{ currentUser().email.split("@")[0] }}</a>
+            <div *ngIf="currentUser()">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark">
+                            <img [src]="currentUser().photoUrl" width="30" alt="user photo" /> Welcome, {{ currentUser().email.split("@")[0] }}</a
+                        >
                     </li>
-                    <li class="nav-item" *ngIf="currentUser()">
+                    <li class="nav-item">
                         <a style="cursor: pointer" class="nav-link" aria-current="page" routerLinkActive="active" (click)="onLogout()">Logout</a>
                     </li>
                 </ul>

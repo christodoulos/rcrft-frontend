@@ -2,6 +2,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root',
@@ -9,6 +10,7 @@ import { environment } from '../../../environments/environment';
 export class AuthService {
     socialAuthService = inject(SocialAuthService);
     http = inject(HttpClient);
+    router = inject(Router);
 
     user = signal(<SocialUser | null>null);
 
@@ -25,6 +27,7 @@ export class AuthService {
                             next: (res) => {
                                 this.user.set(user);
                                 localStorage.setItem('accessToken', res.accessToken);
+                                this.router.navigate(['/indicators']);
                             },
                             error: (err) => {
                                 console.log(err);
