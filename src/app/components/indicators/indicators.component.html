@@ -1,20 +1,27 @@
 <div *ngIf="indicators.length">
-    <div class="row justify-content-center mt-5">
+    <div class="row justify-content-center my-5">
         <div class="col-12 col-md-6">
+            <p class="text-center lead fs-2">Indicators</p>
             <table datatable [dtOptions]="dtOptions" class="table table-striped table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>Defined By</th>
+                        <th>Demo Site</th>
                         <th>Code</th>
+                        <th>Indicator</th>
                         <th>Category</th>
                         <th>Subcategory</th>
-                        <th>Kind</th>
+                        <th>Group</th>
                     </tr>
                 </thead>
                 <tbody class="text-center">
                     <tr *ngFor="let indicator of indicators; let i = index">
                         <td>{{ i + 1 }}</td>
+                        <td>{{ indicator.definedBy }}</td>
+                        <td>{{ indicator.definedBy !== "IMPETUS" ? findUserDemoSite(indicator) : "-" }}</td>
                         <td>{{ indicator.code }}</td>
+                        <td>{{ indicator.description }}</td>
                         <td>{{ indicator.category.description }}</td>
                         <td>{{ indicator.subcategory.description }}</td>
                         <td>{{ indicator.kind }}</td>

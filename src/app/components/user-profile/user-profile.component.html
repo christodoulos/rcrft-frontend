@@ -1,0 +1,33 @@
+<app-backend-messages *ngIf="backendMessage" [message]="backendMessage"></app-backend-messages>
+
+<div class="card w-50 mx-auto mt-5" *ngIf="currentUser()">
+    <div class="card-body">
+        <div class="m-sm-3">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <h2 class="text-center fw-normal">User Profile</h2>
+                <div class="my-3">
+                    <p class="form-label text-center fs-5">Email</p>
+                    <input readonly class="form-control text-center" type="text" [value]="currentUser().email" />
+                </div>
+                <div class="my-3">
+                    <p class="form-label text-center fs-5">Name</p>
+                    <input readonly class="form-control text-center" type="text" [value]="currentUser().name" />
+                </div>
+                <p class="form-label text-center fs-5">Demo Site</p>
+                <select #demoSiteMenu class="form-select w-95 mx-auto" formControlName="demoSite">
+                    <option disabled class="text-center">Please select demo site</option>
+                    <option
+                        *ngFor="let demoSite of demoSites"
+                        class="text-center"
+                        [selected]="currentUser().demoSite === demoSite"
+                        value="{{ demoSite }}"
+                    >
+                        {{ demoSite }}
+                    </option>
+                </select>
+                <!-- Add a submit button -->
+                <button [disabled]="form.invalid" class="btn btn-primary w-100 mt-5" type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,9 @@
 <nav class="navbar-expand-lg navbar border-bottom border-body" data-bs-theme="light">
     <div class="container-fluid">
         <a class="navbar-brand me-5 fs-3" routerLink="/"
-            ><img style="height: 55px" src="../../assets/images/logo.jpg" alt="Impetus Logo" /><span class="ms-2">RCRFT Tool</span></a
+            ><img style="height: 55px" src="../../assets/images/logo.jpg" alt="Impetus Logo" /><span class="ms-2"
+                >Regional Climate Resilience Footprint Tool</span
+            ></a
         >
         <button
             class="navbar-toggler"
@@ -18,6 +20,9 @@
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" routerLink="/home" routerLinkActive="active">Home</a>
+                </li>
+                <li class="nav-item" *ngIf="currentUser()">
+                    <a class="nav-link" aria-current="page" routerLink="/profile" routerLinkActive="active">Profile</a>
                 </li>
                 <li class="nav-item" *ngIf="currentUser()">
                     <a class="nav-link" aria-current="page" routerLink="/indicators" routerLinkActive="active">Indicators</a>

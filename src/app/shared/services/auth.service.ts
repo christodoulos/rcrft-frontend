@@ -1,8 +1,11 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
+import { IAuthResponse } from '../interfaces/auth/authResponse.interface';
+import { IUser } from '../interfaces/auth/user.interface';
+import { IProfileUpdateRequest } from '../interfaces/profile/profileUpdateRequest.interface';
 
 @Injectable({
     providedIn: 'root',
@@ -12,7 +15,7 @@ export class AuthService {
     http = inject(HttpClient);
     router = inject(Router);
 
-    user = signal(<SocialUser | null>null);
+    user = signal(<IUser | null>null);
 
     constructor() {
         this.socialAuthService.authState.subscribe(
@@ -20,12 +23,12 @@ export class AuthService {
                 if (user) {
                     const { idToken } = user;
                     this.http
-                        .post<{ accessToken: string }>(`${environment.apiUrl}/auth/google-auth`, {
+                        .post<IAuthResponse>(`${environment.apiUrl}/auth/google-auth`, {
                             idToken,
                         })
                         .subscribe({
-                            next: (res) => {
-                                this.user.set(user);
+                            next: (res: IAuthResponse) => {
+                                this.user.set(res.user);
                                 localStorage.setItem('accessToken', res.accessToken);
                                 this.router.navigate(['/indicators']);
                             },
@@ -36,7 +39,6 @@ export class AuthService {
                 }
             },
             (err) => {
-                console.log('!!!!!!!!!!!!!!!!!!!1');
                 console.log(err);
             }
         );
@@ -46,5 +48,15 @@ export class AuthService {
         this.socialAuthService.signOut();
         this.user.set(null);
         localStorage.removeItem('accessToken');
+    }
+
+    updateProfile(req: IProfileUpdateRequest) {
+        const apiUrl = `${environment.apiUrl}/auth/profile`;
+        return this.http.patch<{ msg: string }>(apiUrl, req);
+    }
+
+    getAllUsers() {
+        const apiUrl = `${environment.apiUrl}/auth/users`;
+        return this.http.get<IUser[]>(apiUrl);
     }
 }

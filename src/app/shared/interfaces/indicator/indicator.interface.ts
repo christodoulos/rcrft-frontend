@@ -3,6 +3,7 @@ import { ISubcategory } from './subcategory.interface';
 
 export interface IIndicator {
     code: string;
+    definedBy: string;
     category: ICategory;
     data_requirements: string;
     description: string;

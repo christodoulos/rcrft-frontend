@@ -11,6 +11,10 @@ export const routes: Routes = [
         loadChildren: () => import('./components/home/home.routes').then((m) => m.routes),
     },
     {
+        path: 'profile',
+        loadChildren: () => import('./components/user-profile/user-profile.routes').then((m) => m.routes),
+    },
+    {
         path: 'indicators',
         loadChildren: () => import('./components/indicators/indicators.routes').then((m) => m.routes),
     },

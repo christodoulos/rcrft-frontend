@@ -4,6 +4,8 @@ import { IndicatorsService } from '../../shared/services/indicators.service';
 import { DataTablesModule } from 'angular-datatables';
 import { take } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../shared/services/auth.service';
+import { IUser } from '../../shared/interfaces/auth/user.interface';
 
 @Component({
     selector: 'app-indicators',
@@ -14,10 +16,26 @@ import { CommonModule } from '@angular/common';
 })
 export class IndicatorsComponent implements OnInit {
     indicatorsService = inject(IndicatorsService);
+    authService = inject(AuthService);
+    allUsers: IUser[] | null = null;
+
+    currentUser = this.authService.user;
     indicators: IIndicator[] = [];
     dtOptions: DataTables.Settings = {};
 
     ngOnInit(): void {
+        this.authService
+            .getAllUsers()
+            .pipe(take(1))
+            .subscribe(
+                (users: IUser[]) => {
+                    this.allUsers = users;
+                },
+                (err) => {
+                    console.log(err);
+                }
+            );
+
         this.indicatorsService
             .getAllIndicators()
             .pipe(take(1))
@@ -25,5 +43,13 @@ export class IndicatorsComponent implements OnInit {
                 this.indicators = indicators;
                 console.log(this.indicators);
             });
+    }
+
+    findUserDemoSite(indicator: IIndicator) {
+        const demoSiteUser = this.allUsers.find((user) => user.name === indicator.definedBy);
+        if (demoSiteUser) {
+            return demoSiteUser.demoSite;
+        }
+        return '';
     }
 }
