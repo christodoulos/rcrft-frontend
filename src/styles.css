@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+    border: 1px solid red;
+    border-radius: 5px;
+}
+
+/* Change the appearance of the cursor inside disabled buttons */
+.cursor-not-allowed {
+    pointer-events: all !important;
+    cursor: not-allowed !important;
+}

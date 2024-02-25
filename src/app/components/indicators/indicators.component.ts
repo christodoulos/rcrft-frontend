@@ -7,11 +7,12 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../shared/services/auth.service';
 import { IUser } from '../../shared/interfaces/auth/user.interface';
 import { ModalService } from '../../shared/services/modal.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-indicators',
     standalone: true,
-    imports: [CommonModule, DataTablesModule],
+    imports: [CommonModule, DataTablesModule, RouterLink],
     templateUrl: './indicators.component.html',
     styleUrl: './indicators.component.css',
 })

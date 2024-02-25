@@ -18,4 +18,8 @@ export const routes: Routes = [
         path: 'indicators',
         loadChildren: () => import('./components/indicators/indicators.routes').then((m) => m.routes),
     },
+    {
+        path: 'new-indicator',
+        loadChildren: () => import('./components/new-indicator/new-indicator.routes').then((m) => m.routes),
+    },
 ];

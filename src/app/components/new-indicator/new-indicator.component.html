@@ -1,0 +1,110 @@
+<div class="card container my-5">
+    <div class="card-body">
+        <h2 class="text-center fs-2 mb-4">Add Indicator</h2>
+        <div class="m-sm-3">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="form-group row justify-content-center mb-4">
+                    <div class="col-12 col-md-4">
+                        <label for="description" class="form-label">Name</label>
+                        <input class="form-control" type="text" id="description" formControlName="description" />
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <label class="form-label" for="categoryDescription">Category</label>
+                        <select formControlName="categoryDescription" name="categoryDescription" class="form-select w-70 mx-auto">
+                            <option [value]="name" *ngFor="let name of categoryNames">{{ name }}</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <label class="form-label" for="dataRequirements">Data Requirements</label>
+                        <input class="form-control" type="text" id="dataRequirements" formControlName="dataRequirements" />
+                    </div>
+                </div>
+
+                <div class="form-group row justify-content-center mb-4">
+                    <div class="col-12 col-md-4">
+                        <label class="form-label" for="kind">Group</label>
+                        <select formControlName="kind" name="kind" class="form-select w-70 mx-auto">
+                            <option value="vulnerability">Vulnerability</option>
+                            <option value="adaptation">Adaptation</option>
+                            <option value="resilience">Resilience</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <label class="form-label" for="mainAffectedSector">Main Affected Sector</label>
+                        <input class="form-control" type="text" id="mainAffectedSector" formControlName="mainAffectedSector" />
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="mainClimateChangeFactor" class="form-label">Main Climate Change Factor</label>
+                        <input class="form-control" type="text" id="mainClimateChangeFactor" formControlName="mainClimateChangeFactor" />
+                    </div>
+                </div>
+
+                <div class="form-group row justify-content-center mb-4">
+                    <div class="col-12 col-md-4">
+                        <label class="form-label" for="metricsAndUnits">Metrics & Units</label>
+                        <input class="form-control" type="text" id="metricsAndUnits" formControlName="metricsAndUnits" />
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <label class="form-label" for="otherAffectedSectors">Other Affected Sectors</label>
+                        <input class="form-control" type="text" id="otherAffectedSectors" formControlName="otherAffectedSectors" />
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="otherClimateChangeFactors" class="form-label">Other Climate Change Factors</label>
+                        <input class="form-control" type="text" id="otherClimateChangeFactors" formControlName="otherClimateChangeFactors" />
+                    </div>
+                </div>
+
+                <div class="form-group row justify-content-center mb-4">
+                    <div class="col-12 col-md-4">
+                        <label class="form-label" for="principal">Principal</label>
+                        <input class="form-control" type="text" id="principal" formControlName="principal" />
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <label class="form-label" for="references">References</label>
+                        <input class="form-control" type="text" id="references" formControlName="references" />
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="spatialScale" class="form-label">Spatial Scale</label>
+                        <input class="form-control" type="text" id="spatialScale" formControlName="spatialScale" />
+                    </div>
+                </div>
+
+                <div class="form-group row justify-content-center mb-4">
+                    <div class="col-12 col-md-4">
+                        <label class="form-label" for="subcategoryDescription">Subcategory</label>
+                        <select formControlName="subcategoryDescription" name="subcategoryDescription" class="form-select w-70 mx-auto">
+                            <option [value]="name" *ngFor="let name of subcategoryNames">{{ name }}</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <label for="type" class="form-label">Type</label>
+                        <input class="form-control" type="text" id="type" formControlName="type" />
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <label class="form-label" for="typology">Typology</label>
+                        <input class="form-control" type="text" id="typology" formControlName="typology" />
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2 mt-5 mb-2">
+                    <button
+                        type="submit"
+                        [disabled]="form.invalid"
+                        [ngClass]="{ 'cursor-not-allowed': form.invalid }"
+                        style="width: 40%"
+                        class="btn btn-success mx-auto"
+                    >
+                        Add indicator
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
