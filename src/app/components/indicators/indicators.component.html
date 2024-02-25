@@ -13,6 +13,7 @@
                         <th>Category</th>
                         <th>Subcategory</th>
                         <th>Group</th>
+                        <th>Details</th>
                     </tr>
                 </thead>
                 <tbody class="text-center">
@@ -25,6 +26,7 @@
                         <td>{{ indicator.category.description }}</td>
                         <td>{{ indicator.subcategory.description }}</td>
                         <td>{{ indicator.kind }}</td>
+                        <td><button (click)="onDetailsClick(indicator)" class="btn btn-primary">Info</button></td>
                     </tr>
                 </tbody>
             </table>

@@ -6,6 +6,7 @@ import { take } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../shared/services/auth.service';
 import { IUser } from '../../shared/interfaces/auth/user.interface';
+import { ModalService } from '../../shared/services/modal.service';
 
 @Component({
     selector: 'app-indicators',
@@ -16,6 +17,7 @@ import { IUser } from '../../shared/interfaces/auth/user.interface';
 })
 export class IndicatorsComponent implements OnInit {
     indicatorsService = inject(IndicatorsService);
+    modalService = inject(ModalService);
     authService = inject(AuthService);
     allUsers: IUser[] | null = null;
 
@@ -51,5 +53,9 @@ export class IndicatorsComponent implements OnInit {
             return demoSiteUser.demoSite;
         }
         return '';
+    }
+
+    onDetailsClick(indicator: IIndicator) {
+        this.modalService.showIndicatorDetails(indicator);
     }
 }
