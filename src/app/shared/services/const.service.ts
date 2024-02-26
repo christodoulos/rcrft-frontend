@@ -4,5 +4,14 @@ import { Injectable } from '@angular/core';
     providedIn: 'root',
 })
 export class ConstService {
-    DEMO_SITES = ['Athens, Greece', 'Barcelona, Spain', 'Berlin, Germany'];
+    DEMO_SITES = [
+        'Berlin-Brandenburg, DE',
+        'Coast of Catalonia, ES',
+        'Region of Attica, GR',
+        'Province of Zeeland, NL',
+        'Troms & Finnmark, NO',
+        'Zemgale region, LV',
+        'Valle dei Laghi area, IT',
+        'Not specified',
+    ];
 }
