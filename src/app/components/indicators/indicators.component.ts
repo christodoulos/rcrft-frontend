@@ -59,4 +59,8 @@ export class IndicatorsComponent implements OnInit {
     onDetailsClick(indicator: IIndicator) {
         this.modalService.showIndicatorDetails(indicator);
     }
+
+    onAssessClick(indicator: IIndicator) {
+        this.modalService.selectAssessType(indicator);
+    }
 }

@@ -17,6 +17,7 @@
                         <th>Subcategory</th>
                         <th>Group</th>
                         <th>Details</th>
+                        <th>Assess</th>
                     </tr>
                 </thead>
                 <tbody class="text-center">
@@ -29,7 +30,8 @@
                         <td>{{ indicator.category.description }}</td>
                         <td>{{ indicator.subcategory.description }}</td>
                         <td>{{ indicator.kind }}</td>
-                        <td><button (click)="onDetailsClick(indicator)" class="btn btn-primary">Info</button></td>
+                        <td><button (click)="onDetailsClick(indicator)" class="btn btn-sm btn-primary">Info</button></td>
+                        <td><button (click)="onAssessClick(indicator)" class="btn btn-sm btn-success">Create Assessment</button></td>
                     </tr>
                 </tbody>
             </table>

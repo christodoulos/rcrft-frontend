@@ -22,4 +22,13 @@ export const routes: Routes = [
         path: 'new-indicator',
         loadChildren: () => import('./components/new-indicator/new-indicator.routes').then((m) => m.routes),
     },
+    {
+        path: 'assess/quantitative/reference',
+        loadChildren: () => import('./components/assessment/quantitative-reference/quantitative-reference.routes').then((m) => m.routes),
+    },
+    {
+        path: 'assess/quantitative/min-max',
+        loadChildren: () => import('./components/assessment/quantitative-min-max/quantitative-min-max.routes').then((m) => m.routes),
+    },
+    { path: 'assess/qualitative', loadChildren: () => import('./components/assessment/qualitative/qualitative.routes').then((m) => m.routes) },
 ];
