@@ -12,7 +12,7 @@ export class ModalService {
 
     showIndicatorDetails(indicator: IIndicator) {
         console.log(indicator);
-        const modalRef = this.modalService.open(IndicatorDetailsComponent, { size: 'lg', centered: true });
+        const modalRef = this.modalService.open(IndicatorDetailsComponent, { size: 'xl', centered: true });
         modalRef.componentInstance.indicator = indicator;
     }
 }

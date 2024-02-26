@@ -1,7 +1,7 @@
-<div #content>
+<!-- <div #content>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">{{ indicator.description }}</h4>
-        <!-- <button type="button" class="btn-close" aria-label="Close" (click)="onClose()"></button> -->
+        <button type="button" class="btn-close" aria-label="Close" (click)="onClose()"></button>
     </div>
     <div class="modal-body">
         <p>Code: {{ indicator.code }}</p>
@@ -20,5 +20,80 @@
         <p>Type: {{ indicator.type }}</p>
         <p>Typology: {{ indicator.typology }}</p>
         <p>Defined by: {{ indicator.definedBy }}</p>
+    </div>
+</div> -->
+<div #content>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{ indicator.description }}</h4>
+    </div>
+    <div class="modal-body">
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <th>Code</th>
+                    <td>{{ indicator.code }}</td>
+                </tr>
+                <tr>
+                    <th>Category description</th>
+                    <td>{{ indicator.category.description }}</td>
+                </tr>
+                <tr>
+                    <th>Data required</th>
+                    <td>{{ indicator.data_requirements }}</td>
+                </tr>
+                <tr>
+                    <th>Group</th>
+                    <td>{{ indicator.kind }}</td>
+                </tr>
+                <tr>
+                    <th>Main affected sector</th>
+                    <td>{{ indicator.main_affected_sector }}</td>
+                </tr>
+                <tr>
+                    <th>Main climate change factor</th>
+                    <td>{{ indicator.main_climate_change_factor }}</td>
+                </tr>
+                <tr>
+                    <th>Metrics and units</th>
+                    <td>{{ indicator.metrics_and_units }}</td>
+                </tr>
+                <tr>
+                    <th>Other affected sectors</th>
+                    <td>{{ indicator.other_affected_sectors }}</td>
+                </tr>
+                <tr>
+                    <th>Other climate change factors</th>
+                    <td>{{ indicator.other_climate_change_factors }}</td>
+                </tr>
+                <tr>
+                    <th>Principal</th>
+                    <td>{{ indicator.principal }}</td>
+                </tr>
+                <tr>
+                    <th>References</th>
+                    <td>{{ indicator.references }}</td>
+                </tr>
+                <tr>
+                    <th>Spatial scale</th>
+                    <td>{{ indicator.spatial_scale }}</td>
+                </tr>
+                <tr>
+                    <th>Subcategory description</th>
+                    <td>{{ indicator.subcategory.description }}</td>
+                </tr>
+                <tr>
+                    <th>Type</th>
+                    <td>{{ indicator.type }}</td>
+                </tr>
+                <tr>
+                    <th>Typology</th>
+                    <td>{{ indicator.typology }}</td>
+                </tr>
+                <tr>
+                    <th>Defined by</th>
+                    <td>{{ indicator.definedBy }}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
