@@ -30,5 +30,12 @@ export const routes: Routes = [
         path: 'assess/quantitative/min-max',
         loadChildren: () => import('./components/assessment/quantitative-min-max/quantitative-min-max.routes').then((m) => m.routes),
     },
-    { path: 'assess/qualitative', loadChildren: () => import('./components/assessment/qualitative/qualitative.routes').then((m) => m.routes) },
+    {
+        path: 'assess/qualitative',
+        loadChildren: () => import('./components/assessment/qualitative/qualitative.routes').then((m) => m.routes),
+    },
+    {
+        path: 'assessments',
+        loadChildren: () => import('./components/assessments/assessments.routes').then((m) => m.routes),
+    },
 ];

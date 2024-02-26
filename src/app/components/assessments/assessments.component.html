@@ -1,0 +1,41 @@
+<div *ngIf="assessments.length">
+    <div class="row justify-content-center my-5">
+        <div class="col-12 col-md-6">
+            <p class="text-center lead fs-2">Assessments</p>
+            <table datatable [dtOptions]="dtOptions" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Defined By</th>
+                        <th>Demo Site</th>
+                        <th>Indicator</th>
+                        <th>Value</th>
+                        <th>Target Reference Value</th>
+                        <th>Min Value</th>
+                        <th>Max Value</th>
+                        <th>Inverse</th>
+                        <th>Alternative Name</th>
+                        <th>Final Value</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    <tr *ngFor="let assessment of assessments; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ assessment.user }}</td>
+                        <td>{{ assessment.demoSite }}</td>
+                        <td>{{ assessment.indicator }}</td>
+                        <td>{{ assessment.value }}</td>
+                        <td>{{ assessment.reference_value }}</td>
+                        <td>{{ assessment.min_value }}</td>
+                        <td>{{ assessment.max_value }}</td>
+                        <td>{{ assessment.is_inverse }}</td>
+                        <td>{{ assessment.alternative_description }}</td>
+                        <td>{{ assessment.normalized_value }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!assessments.length">Nobody has created any assessments yet.</div>

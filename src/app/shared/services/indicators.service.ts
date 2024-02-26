@@ -5,6 +5,7 @@ import { IIndicator } from '../interfaces/indicator/indicator.interface';
 import { environment } from '../../../environments/environment';
 import { ICategoryNames } from '../interfaces/indicator/categoryNames.interfaces';
 import { ISubcategoryNames } from '../interfaces/indicator/subcategoryNames.interface';
+import { IAssessment } from '../interfaces/assessment.interface';
 
 @Injectable({
     providedIn: 'root',
@@ -30,5 +31,15 @@ export class IndicatorsService {
     createIndicator(indicator: IIndicator): Observable<{ msg: string }> {
         const url = `${environment.apiUrl}/rcrft/add-indicator`;
         return this.http.post<{ msg: string }>(url, indicator);
+    }
+
+    newAssessment(data: any): Observable<{ msg: string }> {
+        const url = `${environment.apiUrl}/rcrft/new-assessment`;
+        return this.http.post<{ msg: string }>(url, data);
+    }
+
+    getAllAssessments(): Observable<IAssessment[]> {
+        const url = `${environment.apiUrl}/rcrft/get-all-assessments`;
+        return this.http.get<IAssessment[]>(url);
     }
 }

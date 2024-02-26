@@ -27,6 +27,9 @@
                 <li class="nav-item" *ngIf="currentUser()">
                     <a class="nav-link" aria-current="page" routerLink="/indicators" routerLinkActive="active">Indicators</a>
                 </li>
+                <li class="nav-item" *ngIf="currentUser()">
+                    <a class="nav-link" aria-current="page" routerLink="/assessments" routerLinkActive="active">Assessments</a>
+                </li>
             </ul>
 
             <div *ngIf="currentUser()">

@@ -1,1 +1,31 @@
-<p>qualitative works!</p>
+<div class="card w-50 mx-auto mt-5" *ngIf="currentUser()">
+    <div class="card-body">
+        <div class="m-sm-3">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <p class="text-center fs-2">
+                    Qualitative assessment: <span class="fw-semibold">{{ indicator.description }}</span>
+                </p>
+                <p class="form-label text-center fs-5">Expert judgment</p>
+                <div class="my-3 d-flex">
+                    <span class="me-2">0</span>
+                    <input
+                        #normalizedValue
+                        type="range"
+                        class="form-range"
+                        formControlName="normalizedValue"
+                        value="2.5"
+                        min="0"
+                        max="5"
+                        step="0.5"
+                    />
+                    <span class="ms-2">5</span>
+                </div>
+                <p class="text-center">{{ normalizedValue.value }}</p>
+                <!-- Add a submit button -->
+                <div class="d-flex row">
+                    <button [disabled]="form.invalid" class="btn btn-primary w-50 mx-auto mt-5" type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
