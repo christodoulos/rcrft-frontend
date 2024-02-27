@@ -17,7 +17,10 @@ export class AssessmentsComponent implements OnInit {
     indicatorsService = inject(IndicatorsService);
 
     assessments: IAssessment[] = [];
-    dtOptions: DataTables.Settings = {};
+    dtOptions: DataTables.Settings = {
+        responsive: true,
+        processing: true,
+    };
 
     ngOnInit(): void {
         this.indicatorsService
