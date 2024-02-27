@@ -48,6 +48,7 @@ export class AuthService {
         this.socialAuthService.signOut();
         this.user.set(null);
         localStorage.removeItem('accessToken');
+        this.router.navigate(['/home']);
     }
 
     updateProfile(req: IProfileUpdateRequest) {
