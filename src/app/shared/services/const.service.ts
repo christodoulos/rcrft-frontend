@@ -14,4 +14,6 @@ export class ConstService {
         'Valle dei Laghi area, IT',
         'Not specified',
     ];
+
+    NUMBER_REGEX = /^[-+]?\d*\.?\d+$/;
 }

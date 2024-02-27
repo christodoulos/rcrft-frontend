@@ -1,1 +1,35 @@
-<p>quantitative-min-max works!</p>
+<div class="card w-50 mx-auto mt-5" *ngIf="currentUser()">
+    <div class="card-body">
+        <div class="m-sm-3">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <p class="text-center fs-2">
+                    Quantitative assessment (min-max): <span class="fw-semibold">{{ indicator.description }}</span>
+                </p>
+                <div class="my-3">
+                    <p class="form-label text-center fs-5">Value</p>
+                    <input formControlName="value" type="text" class="form-control text-center" />
+                </div>
+                <div class="my-3">
+                    <p class="form-label text-center fs-5">Min Value</p>
+                    <input formControlName="minValue" type="text" class="form-control text-center" />
+                </div>
+                <div class="my-3">
+                    <p class="form-label text-center fs-5">Max Value</p>
+                    <input formControlName="maxValue" type="text" class="form-control text-center" />
+                </div>
+
+                <div class="form-check">
+                    <input #isInverse formControlName="isInverse" class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                    <label class="form-check-label" for="flexCheckDefault"> Inverse? </label>
+                </div>
+                <div class="my-3" *ngIf="isInverse.checked">
+                    <p class="form-label text-center fs-5">Alternative Title</p>
+                    <input formControlName="alternativeTitle" type="text" class="form-control text-center" />
+                </div>
+
+                <!-- Add a submit button -->
+                <button [disabled]="form.invalid" class="btn btn-primary w-100 mt-5" type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
