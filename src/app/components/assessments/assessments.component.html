@@ -37,6 +37,50 @@
                 </table>
             </div>
         </div>
+
+        <div class="card w-50 mx-auto my-5">
+            <div class="card-body">
+                <div class="m-sm-3">
+                    <form [formGroup]="form">
+                        <p class="text-center fs-3">Create a graph</p>
+
+                        <p class="form-label text-center fs-5">Choose demo site</p>
+                        <select class="form-select w-95 mx-auto" formControlName="demoSite">
+                            <option disabled class="text-center">Please select demo site</option>
+                            <option
+                                *ngFor="let demoSite of demoSites"
+                                class="text-center"
+                                [selected]="currentUser().demoSite === demoSite"
+                                value="{{ demoSite }}"
+                            >
+                                {{ demoSite }}
+                            </option>
+                        </select>
+                        <div class="form-check">
+                            <input #showOne formControlName="showOne" class="form-check-input" type="checkbox" value="" id="showOne" />
+                            <label class="form-check-label" for="showOne"> View your assessments only </label>
+                        </div>
+                        <div class="my-3" *ngIf="!showOne.checked">
+                            <p class="form-label text-center fs-5">Choose metric</p>
+                            <select class="form-select w-95 mx-auto" formControlName="metric">
+                                <option class="text-center" value="average">Average</option>
+                                <option class="text-center" value="median">Median</option>
+                                <option class="text-center" value="min">Minimum</option>
+                                <option class="text-center" value="max">Maximum</option>
+                            </select>
+                        </div>
+                        <button [disabled]="form.invalid" class="btn btn-primary w-100 mt-5" type="submit" (click)="onSubmit()">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center my-5" *ngIf="showChart">
+            <div class="col-12 col-md-6">
+                <p class="text-center lead fs-2">Indicators Assessment</p>
+                <app-spider-chart [assessments]="activeAssessments"></app-spider-chart>
+            </div>
+        </div>
     </div>
 </div>
 

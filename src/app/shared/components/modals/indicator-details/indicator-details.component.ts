@@ -10,6 +10,7 @@ import { IIndicator } from '../../../interfaces/indicator/indicator.interface';
 })
 export class IndicatorDetailsComponent {
     @Input() indicator: IIndicator | null = null;
+    @Input() modalRef: any;
 
     onClose() {
         // Destroy the component

@@ -15,6 +15,7 @@ export class ModalService {
         console.log(indicator);
         const modalRef = this.modalService.open(IndicatorDetailsComponent, { size: 'xl', centered: true });
         modalRef.componentInstance.indicator = indicator;
+        modalRef.componentInstance.modalRef = modalRef;
     }
 
     selectAssessType(indicator: IIndicator) {

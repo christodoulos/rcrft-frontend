@@ -1,6 +1,7 @@
 <div>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Select Assessment Type</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
         <button (click)="onAssessClick('a')" class="btn btn-primary d-block my-2">Quantitative approach with target reference value</button>
