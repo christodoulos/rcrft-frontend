@@ -28,7 +28,8 @@ export class IndicatorsComponent implements OnInit {
 
     currentUser = this.authService.user;
     indicators: IIndicator[] = [];
-    dtOptions: DataTables.Settings = {};
+
+    dtOptions: any = {};
     isLoading = true;
 
     ngOnInit(): void {
@@ -65,6 +66,10 @@ export class IndicatorsComponent implements OnInit {
                     });
                 }, 2000);
             });
+
+        // this.dtOptions = {
+        //     responsive: true,
+        // };
     }
 
     findUserDemoSite(indicator: IIndicator) {
