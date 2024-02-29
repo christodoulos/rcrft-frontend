@@ -60,37 +60,38 @@ export class AssessmentsComponent implements OnInit {
             this.activeAssessments = this.assessments.filter((assessment) => assessment.user === this.currentUser().email);
         } else {
             const tempAssessments: IAssessment[] = this.assessments.filter((assessment) => assessment.demoSite === demoSite);
-            const tempAssessments2: { [key: string]: any } = {};
+            let tempAssessments2: { [key: string]: IAssessment[] } = {};
 
-            tempAssessments.forEach((assessment) => {
-                const indicatorName = assessment.indicator;
-                if (!(assessment.indicator in tempAssessments2)) {
-                    tempAssessments2[indicatorName] = [assessment];
-                } else {
-                    tempAssessments2[indicatorName].push(assessment);
+            for (let assessment of tempAssessments) {
+                let key = assessment.indicator;
+                console.log(key);
+                if (key !== undefined) {
+                    if (tempAssessments2[key] === undefined) {
+                        tempAssessments2[key] = [];
+                    }
+                    tempAssessments2[key].push(assessment);
                 }
-            });
+            }
+            console.log(tempAssessments2);
 
             Object.keys(tempAssessments2).forEach((key) => {
-                tempAssessments2[key] = tempAssessments2[key].forEach((assessment: IAssessment) => assessment.normalized_value);
+                let values = tempAssessments2[key].map((assessment) => assessment.normalized_value);
+                let value = 0;
                 switch (metric) {
-                    case 'mean':
-                        tempAssessments2[key] = mean(tempAssessments2[key]);
+                    case 'average':
+                        value = mean(values);
                         break;
                     case 'median':
-                        tempAssessments2[key] = median(tempAssessments2[key]);
+                        value = median(values);
                         break;
                     case 'min':
-                        tempAssessments2[key] = min(tempAssessments2[key]);
+                        value = min(values);
                         break;
                     case 'max':
-                        tempAssessments2[key] = max(tempAssessments2[key]);
+                        value = max(values);
                         break;
                 }
-            });
-
-            Object.keys(tempAssessments2).forEach((key) => {
-                this.activeAssessments.push({ indicator: key, normalized_value: tempAssessments2[key] });
+                this.activeAssessments.push({ indicator: key, normalized_value: value });
             });
         }
         setTimeout(() => {
