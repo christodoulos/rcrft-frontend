@@ -46,7 +46,7 @@ export class AssessmentsComponent implements OnInit {
 
         this.form = new FormGroup({
             demoSite: new FormControl(this.currentUser().demoSite, [Validators.required]),
-            showOne: new FormControl(false),
+            showOne: new FormControl(true),
             metric: new FormControl('average', [Validators.required]),
         });
     }
@@ -96,10 +96,10 @@ export class AssessmentsComponent implements OnInit {
                 this.activeAssessments.push({ indicator: key, normalized_value: value });
             });
         }
+
+        // This is a workaround to make sure that the previous chart is removed before the new one is created
         setTimeout(() => {
             this.showChart = true;
-        }, 500);
-
-        console.log(this.activeAssessments);
+        }, 1);
     }
 }

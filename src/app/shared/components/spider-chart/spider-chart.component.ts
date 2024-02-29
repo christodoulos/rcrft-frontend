@@ -44,17 +44,17 @@ export class SpiderChartComponent implements OnInit {
                 //     name: 'Minimum',
                 //     data: Array(this.assessments.length).fill(0),
                 // },
+                // {
+                //     name: 'Maximum',
+                //     data: Array(this.assessments.length).fill(5),
+                // },
                 {
-                    name: 'Maximum',
-                    data: Array(this.assessments.length).fill(5),
-                },
-                {
-                    name: 'Indicators',
+                    name: '',
                     data: this.assessments.map((assessment) => assessment.normalized_value),
                 },
             ],
             chart: {
-                height: 550,
+                height: 700,
                 type: 'radar',
                 dropShadow: {
                     enabled: true,
@@ -73,7 +73,7 @@ export class SpiderChartComponent implements OnInit {
                 opacity: 0.4,
             },
             markers: {
-                size: 1,
+                size: 5,
             },
             xaxis: {
                 categories: this.assessments.map((assessment) => (assessment.is_inverse ? assessment.alternative_description : assessment.indicator)),

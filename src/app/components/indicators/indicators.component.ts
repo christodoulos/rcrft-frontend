@@ -20,6 +20,7 @@ export class IndicatorsComponent implements OnInit {
     indicatorsService = inject(IndicatorsService);
     modalService = inject(ModalService);
     authService = inject(AuthService);
+
     allUsers: IUser[] | null = null;
 
     currentUser = this.authService.user;
@@ -48,6 +49,8 @@ export class IndicatorsComponent implements OnInit {
                 console.log(this.indicators);
                 this.isLoading = false;
             });
+
+        this.dtOptions = {};
     }
 
     findUserDemoSite(indicator: IIndicator) {
