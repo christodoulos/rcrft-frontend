@@ -12,3 +12,9 @@ select.ng-invalid.ng-touched {
     pointer-events: all !important;
     cursor: not-allowed !important;
 }
+
+td,
+th {
+    vertical-align: middle !important;
+    text-align: center !important;
+}
