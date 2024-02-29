@@ -25,6 +25,7 @@ export class IndicatorsComponent implements OnInit {
     currentUser = this.authService.user;
     indicators: IIndicator[] = [];
     dtOptions: DataTables.Settings = {};
+    isLoading = true;
 
     ngOnInit(): void {
         this.authService
@@ -45,6 +46,7 @@ export class IndicatorsComponent implements OnInit {
             .subscribe((indicators: IIndicator[]) => {
                 this.indicators = indicators;
                 console.log(this.indicators);
+                this.isLoading = false;
             });
     }
 

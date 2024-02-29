@@ -33,6 +33,7 @@ export class AssessmentsComponent implements OnInit {
         responsive: true,
         processing: true,
     };
+    isLoading = true;
 
     ngOnInit(): void {
         this.indicatorsService
@@ -40,6 +41,7 @@ export class AssessmentsComponent implements OnInit {
             .pipe(take(1))
             .subscribe((assessments: IAssessment[]) => {
                 this.assessments = assessments;
+                this.isLoading = false;
             });
 
         this.form = new FormGroup({
