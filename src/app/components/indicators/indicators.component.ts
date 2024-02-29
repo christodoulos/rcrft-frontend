@@ -1,7 +1,7 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { IIndicator } from '../../shared/interfaces/indicator/indicator.interface';
 import { IndicatorsService } from '../../shared/services/indicators.service';
-import { DataTablesModule } from 'angular-datatables';
+import { DataTableDirective, DataTablesModule } from 'angular-datatables';
 import { take } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../shared/services/auth.service';
@@ -20,6 +20,9 @@ export class IndicatorsComponent implements OnInit {
     indicatorsService = inject(IndicatorsService);
     modalService = inject(ModalService);
     authService = inject(AuthService);
+
+    @ViewChild(DataTableDirective, { static: false })
+    datatableElement: DataTableDirective;
 
     allUsers: IUser[] | null = null;
 
@@ -48,9 +51,20 @@ export class IndicatorsComponent implements OnInit {
                 this.indicators = indicators;
                 console.log(this.indicators);
                 this.isLoading = false;
-            });
 
-        this.dtOptions = {};
+                setTimeout(() => {
+                    this.datatableElement.dtInstance.then((dtInstance: DataTables.Api) => {
+                        dtInstance.columns().every(function () {
+                            const that = this;
+                            $('input', this.footer()).on('keyup change', function () {
+                                if (that.search() !== this['value']) {
+                                    that.search(this['value']).draw();
+                                }
+                            });
+                        });
+                    });
+                }, 2000);
+            });
     }
 
     findUserDemoSite(indicator: IIndicator) {

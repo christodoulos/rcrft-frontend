@@ -16,6 +16,19 @@
                     <button class="btn btn-success" routerLink="/new-indicator">Add Indicator</button>
                 </div>
                 <table datatable [dtOptions]="dtOptions" class="table table-striped table-bordered table-hover">
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th><input size="5" class="form-control" type="text" placeholder="Search" name="search-defined-by" /></th>
+                            <th><input size="5" class="form-control" type="text" placeholder="Search" name="search-demo-site" /></th>
+                            <th><input size="5" class="form-control" type="text" placeholder="Search" name="search-code" /></th>
+                            <th><input size="5" class="form-control" type="text" placeholder="Search" name="search-indicator" /></th>
+                            <th><input size="5" class="form-control" type="text" placeholder="Search" name="search-category" /></th>
+                            <th><input size="5" class="form-control" type="text" placeholder="Search" name="search-subcategory" /></th>
+                            <th><input size="5" class="form-control" type="text" placeholder="Search" name="search-group" /></th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
                     <thead>
                         <tr>
                             <th>#</th>
@@ -26,8 +39,7 @@
                             <th>Category</th>
                             <th>Subcategory</th>
                             <th>Group</th>
-                            <th>Details</th>
-                            <th>Assess</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
@@ -40,24 +52,13 @@
                             <td>{{ indicator.category.description }}</td>
                             <td>{{ indicator.subcategory.description }}</td>
                             <td>{{ indicator.kind }}</td>
-                            <td><button (click)="onDetailsClick(indicator)" class="btn btn-sm btn-primary">Info</button></td>
-                            <td><button (click)="onAssessClick(indicator)" class="btn btn-sm btn-success">Create Assessment</button></td>
+                            <td>
+                                <button (click)="onDetailsClick(indicator)" class="btn btn-sm btn-primary">Info</button>
+                                <p></p>
+                                <button (click)="onAssessClick(indicator)" class="btn btn-sm btn-success">Assessment</button>
+                            </td>
                         </tr>
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <th></th>
-                            <th><input size="5" class="form-control" type="text" placeholder="Search" name="search-defined-by" /></th>
-                            <th><input size="5" class="form-control" type="text" placeholder="Search" name="search-demo-site" /></th>
-                            <th><input size="5" class="form-control" type="text" placeholder="Search" name="search-code" /></th>
-                            <th><input size="5" class="form-control" type="text" placeholder="Search" name="search-indicator" /></th>
-                            <th><input size="5" class="form-control" type="text" placeholder="Search" name="search-category" /></th>
-                            <th><input size="5" class="form-control" type="text" placeholder="Search" name="search-subcategory" /></th>
-                            <th><input size="5" class="form-control" type="text" placeholder="Search" name="search-group" /></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </tfoot>
                 </table>
             </div>
         </div>
