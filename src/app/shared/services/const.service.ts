@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
     providedIn: 'root',
 })
 export class ConstService {
-    DEMO_SITES = [
+    readonly DEMO_SITES = [
         'Berlin-Brandenburg, DE',
         'Coast of Catalonia, ES',
         'Region of Attica, GR',
@@ -14,6 +14,8 @@ export class ConstService {
         'Valle dei Laghi area, IT',
         'Not specified',
     ];
+
+    readonly StakeHolderTypes = ['Public', 'Private', 'Academic', 'Government', 'NGO', 'Not Specified'];
 
     NUMBER_REGEX = /^[-+]?\d*\.?\d+$/;
 }

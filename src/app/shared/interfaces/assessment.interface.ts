@@ -2,6 +2,8 @@ export interface IAssessment {
     indicator: string;
     user: string;
     demoSite: string;
+    stakeHolderType: string;
+    degreeOfCertainty: number;
     value: number;
     reference_value: number;
     min_value: number;

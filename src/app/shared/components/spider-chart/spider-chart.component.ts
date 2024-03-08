@@ -10,6 +10,8 @@ import {
     ApexStroke,
     ApexMarkers,
     NgApexchartsModule,
+    ApexPlotOptions,
+    ApexYAxis,
 } from 'ng-apexcharts';
 import { IAssessment } from '../../interfaces/assessment.interface';
 
@@ -17,10 +19,12 @@ export type ChartOptions = {
     series: ApexAxisChartSeries;
     chart: ApexChart;
     title: ApexTitleSubtitle;
+    plotOptions: ApexPlotOptions;
     stroke: ApexStroke;
     fill: ApexFill;
     markers: ApexMarkers;
     xaxis: ApexXAxis;
+    yaxis: ApexYAxis;
 };
 
 @Component({
@@ -40,17 +44,18 @@ export class SpiderChartComponent implements OnInit {
     ngOnInit(): void {
         this.chartOptions = {
             series: [
-                // {
-                //     name: 'Minimum',
-                //     data: Array(this.assessments.length).fill(0),
-                // },
-                // {
-                //     name: 'Maximum',
-                //     data: Array(this.assessments.length).fill(5),
-                // },
                 {
                     name: '',
+                    data: Array(this.assessments.length).fill(5),
+                    color: 'rgba(0, 0, 0, 0.0)',
+                },
+                {
+                    name: 'Normalized Value',
                     data: this.assessments.map((assessment) => assessment.normalized_value),
+                },
+                {
+                    name: 'Degree of Certainty',
+                    data: this.assessments.map((assessment) => assessment.degreeOfCertainty),
                 },
             ],
             chart: {
@@ -78,6 +83,7 @@ export class SpiderChartComponent implements OnInit {
             xaxis: {
                 categories: this.assessments.map((assessment) => (assessment.is_inverse ? assessment.alternative_description : assessment.indicator)),
             },
+            yaxis: {},
         };
     }
 }

@@ -21,6 +21,23 @@
                     <span class="ms-2">5</span>
                 </div>
                 <p class="text-center">{{ normalizedValue.value }}</p>
+
+                <p class="form-label text-center fs-5">Degree of Certainty</p>
+                <div class="my-3 d-flex">
+                    <span class="me-2">1</span>
+                    <input
+                        #degreeOfCertainty
+                        type="range"
+                        class="form-range"
+                        formControlName="degreeOfCertainty"
+                        value="3"
+                        min="1"
+                        max="5"
+                        step="1"
+                    />
+                    <span class="ms-2">5</span>
+                </div>
+                <p class="text-center">{{ degreeOfCertainty.value }}</p>
                 <!-- Add a submit button -->
                 <div class="d-flex row">
                     <button [disabled]="form.invalid" class="btn btn-primary w-50 mx-auto mt-5" type="submit">Save</button>

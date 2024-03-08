@@ -22,10 +22,12 @@ export class UserProfileComponent implements OnInit {
 
     form: FormGroup;
     demoSites = this.constService.DEMO_SITES;
+    stakeHolderTypes = this.constService.StakeHolderTypes;
 
     ngOnInit(): void {
         this.form = new FormGroup({
             demoSite: new FormControl(this.currentUser().demoSite, [Validators.required]),
+            stakeHolderType: new FormControl(this.currentUser().stakeHolderType, [Validators.required]),
         });
     }
 

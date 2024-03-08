@@ -38,6 +38,7 @@ export class QuantitativeMinMaxComponent {
             maxValue: new FormControl('', [Validators.required, Validators.pattern(this.constService.NUMBER_REGEX)]),
             isInverse: new FormControl(false),
             alternativeTitle: new FormControl(''),
+            degreeOfCertainty: new FormControl(),
         });
     }
 
@@ -51,6 +52,7 @@ export class QuantitativeMinMaxComponent {
             isInverse: this.form.value.isInverse,
             alternativeTitle: this.form.value.alternativeTitle,
             normalizedValue: null,
+            degreeOfCertainty: ((this.form.value.degreeOfCertainty - 1) * 5) / 4,
         };
 
         if (data.isInverse) {

@@ -27,6 +27,7 @@
                             <th>Inverse</th>
                             <th>Alternative Name</th>
                             <th>Final Value</th>
+                            <th>Degree Of Certainty</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,6 +43,7 @@
                             <td class="text-center">{{ assessment.is_inverse }}</td>
                             <td class="text-center">{{ assessment.alternative_description != "" ? assessment.alternative_description : "-" }}</td>
                             <td class="text-center">{{ assessment.normalized_value.toFixed(3) }}</td>
+                            <td class="text-center">{{ assessment.degreeOfCertainty }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -72,6 +74,21 @@
                                     value="{{ demoSite }}"
                                 >
                                     {{ demoSite }}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="my-3" *ngIf="!showOne.checked">
+                            <p class="form-label text-center fs-5">Choose stakeholder type</p>
+                            <select class="form-select w-95 mx-auto" formControlName="stakeHolderType">
+                                <option disabled class="text-center">Please select stakeholder type</option>
+                                <option
+                                    *ngFor="let stakeHolderType of stakeHolderTypes"
+                                    class="text-center"
+                                    [selected]="currentUser().stakeHolderType === stakeHolderType"
+                                    value="{{ stakeHolderType }}"
+                                >
+                                    {{ stakeHolderType }}
                                 </option>
                             </select>
                         </div>

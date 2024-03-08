@@ -7,4 +7,5 @@ export interface IUser {
     name: string;
     photoUrl: string;
     demoSite: string;
+    stakeHolderType: string;
 }

@@ -25,6 +25,8 @@ export class AssessmentsComponent implements OnInit {
 
     currentUser = this.authService.user;
     demoSites = this.constService.DEMO_SITES;
+    stakeHolderTypes = this.constService.StakeHolderTypes;
+
     form: FormGroup;
     assessments: IAssessment[] = [];
     activeAssessments: Partial<IAssessment>[] = [];
@@ -46,6 +48,7 @@ export class AssessmentsComponent implements OnInit {
 
         this.form = new FormGroup({
             demoSite: new FormControl(this.currentUser().demoSite, [Validators.required]),
+            stakeHolderType: new FormControl(this.currentUser().stakeHolderType, [Validators.required]),
             showOne: new FormControl(true),
             metric: new FormControl('average', [Validators.required]),
         });
@@ -55,18 +58,19 @@ export class AssessmentsComponent implements OnInit {
         this.showChart = false;
         this.activeAssessments = [];
         console.log(this.form.value);
-        const { demoSite, showOne, metric } = this.form.value;
+        const { demoSite, stakeHolderType, showOne, metric } = this.form.value;
 
         // Logic to filter assessments based on form values
         if (showOne) {
             this.activeAssessments = this.assessments.filter((assessment) => assessment.user === this.currentUser().email);
         } else {
-            const tempAssessments: IAssessment[] = this.assessments.filter((assessment) => assessment.demoSite === demoSite);
+            const tempAssessments: IAssessment[] = this.assessments.filter(
+                (assessment) => assessment.demoSite === demoSite && assessment.stakeHolderType === stakeHolderType
+            );
             let tempAssessments2: { [key: string]: IAssessment[] } = {};
 
             for (let assessment of tempAssessments) {
                 let key = assessment.indicator;
-                console.log(key);
                 if (key !== undefined) {
                     if (tempAssessments2[key] === undefined) {
                         tempAssessments2[key] = [];
@@ -74,6 +78,7 @@ export class AssessmentsComponent implements OnInit {
                     tempAssessments2[key].push(assessment);
                 }
             }
+
             console.log(tempAssessments2);
 
             Object.keys(tempAssessments2).forEach((key) => {
@@ -93,7 +98,25 @@ export class AssessmentsComponent implements OnInit {
                         value = max(values);
                         break;
                 }
-                this.activeAssessments.push({ indicator: key, normalized_value: value });
+
+                let certaintyValues = tempAssessments2[key].map((assessment) => assessment.degreeOfCertainty);
+                let certaintyValue = 0;
+                switch (metric) {
+                    case 'average':
+                        certaintyValue = mean(certaintyValues);
+                        break;
+                    case 'median':
+                        certaintyValue = median(certaintyValues);
+                        break;
+                    case 'min':
+                        certaintyValue = min(certaintyValues);
+                        break;
+                    case 'max':
+                        certaintyValue = max(certaintyValues);
+                        break;
+                }
+
+                this.activeAssessments.push({ indicator: key, normalized_value: value, degreeOfCertainty: certaintyValue });
             });
         }
 
