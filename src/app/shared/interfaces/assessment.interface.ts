@@ -11,4 +11,5 @@ export interface IAssessment {
     is_inverse: boolean;
     alternative_description: string;
     normalized_value: number;
+    indicatorWeight: number;
 }

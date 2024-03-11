@@ -39,6 +39,7 @@ export class QuantitativeMinMaxComponent {
             isInverse: new FormControl(false),
             alternativeTitle: new FormControl(''),
             degreeOfCertainty: new FormControl(),
+            indicatorWeight: new FormControl(),
         });
     }
 
@@ -53,6 +54,7 @@ export class QuantitativeMinMaxComponent {
             alternativeTitle: this.form.value.alternativeTitle,
             normalizedValue: null,
             degreeOfCertainty: ((this.form.value.degreeOfCertainty - 1) * 5) / 4,
+            indicatorWeight: this.form.value.indicatorWeight / 5,
         };
 
         if (data.isInverse) {

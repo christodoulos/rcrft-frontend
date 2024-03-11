@@ -40,6 +40,14 @@
                 </div>
                 <p class="text-center">{{ degreeOfCertainty.value }}</p>
 
+                <p class="form-label text-center fs-5">Indicator Weight</p>
+                <div class="my-3 d-flex">
+                    <span class="me-2">0</span>
+                    <input #indicatorWeight type="range" class="form-range" formControlName="indicatorWeight" value="1" min="0" max="5" step="0.5" />
+                    <span class="ms-2">5</span>
+                </div>
+                <p class="text-center">{{ indicatorWeight.value }}</p>
+
                 <!-- Add a submit button -->
                 <button [disabled]="form.invalid" class="btn btn-primary w-100 mt-5" type="submit">Save</button>
             </form>

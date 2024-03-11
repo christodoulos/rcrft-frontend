@@ -12,12 +12,14 @@ import {
     NgApexchartsModule,
     ApexPlotOptions,
     ApexYAxis,
+    ApexLegend,
 } from 'ng-apexcharts';
 import { IAssessment } from '../../interfaces/assessment.interface';
 
 export type ChartOptions = {
     series: ApexAxisChartSeries;
     chart: ApexChart;
+    legend: ApexLegend;
     title: ApexTitleSubtitle;
     plotOptions: ApexPlotOptions;
     stroke: ApexStroke;
@@ -39,27 +41,34 @@ export class SpiderChartComponent implements OnInit {
     chartOptions: Partial<ChartOptions>;
 
     @Input() assessments: Partial<IAssessment>[] = [];
-    chartTitle: string = '';
+    @Input() showDegreesOfCertainty: boolean;
+    series: ApexAxisChartSeries;
 
     ngOnInit(): void {
+        this.series = [
+            {
+                name: '',
+                data: Array(this.assessments.length).fill(5),
+                color: 'rgba(0, 0, 0, 0.0)',
+            },
+        ];
+
+        if (this.showDegreesOfCertainty) {
+            this.series.push({
+                name: 'Degree of Certainty',
+                data: this.assessments.map((assessment) => assessment.degreeOfCertainty),
+            });
+        } else {
+            this.series.push({
+                name: 'Normalized Value',
+                data: this.assessments.map((assessment) => assessment.normalized_value),
+            });
+        }
+
         this.chartOptions = {
-            series: [
-                {
-                    name: '',
-                    data: Array(this.assessments.length).fill(5),
-                    color: 'rgba(0, 0, 0, 0.0)',
-                },
-                {
-                    name: 'Normalized Value',
-                    data: this.assessments.map((assessment) => assessment.normalized_value),
-                },
-                {
-                    name: 'Degree of Certainty',
-                    data: this.assessments.map((assessment) => assessment.degreeOfCertainty),
-                },
-            ],
+            series: this.series,
             chart: {
-                height: 700,
+                height: 500,
                 type: 'radar',
                 dropShadow: {
                     enabled: true,
@@ -68,8 +77,8 @@ export class SpiderChartComponent implements OnInit {
                     top: 1,
                 },
             },
-            title: {
-                text: this.chartTitle,
+            legend: {
+                show: false,
             },
             stroke: {
                 width: 1,

@@ -27,6 +27,7 @@ export class AssessmentsComponent implements OnInit {
     demoSites = this.constService.DEMO_SITES;
     stakeHolderTypes = this.constService.StakeHolderTypes;
 
+    resilienceScore: number = -1;
     form: FormGroup;
     assessments: IAssessment[] = [];
     activeAssessments: Partial<IAssessment>[] = [];
@@ -48,25 +49,42 @@ export class AssessmentsComponent implements OnInit {
 
         this.form = new FormGroup({
             demoSite: new FormControl(this.currentUser().demoSite, [Validators.required]),
-            stakeHolderType: new FormControl(this.currentUser().stakeHolderType, [Validators.required]),
+            stakeHolderType: new FormControl('anyStakeholderType', [Validators.required]),
             showOne: new FormControl(true),
             metric: new FormControl('average', [Validators.required]),
         });
     }
 
     onSubmit(): void {
+        this.resilienceScore = -1;
+
         this.showChart = false;
         this.activeAssessments = [];
-        console.log(this.form.value);
         const { demoSite, stakeHolderType, showOne, metric } = this.form.value;
 
         // Logic to filter assessments based on form values
         if (showOne) {
             this.activeAssessments = this.assessments.filter((assessment) => assessment.user === this.currentUser().email);
+            let resilienceScoreSum = 0;
+            let resilienceScoreTotalWeight = 0;
+            this.assessments.forEach((assessment) => {
+                if (assessment.user === this.currentUser().email) {
+                    resilienceScoreSum += assessment.normalized_value * assessment.indicatorWeight;
+                    resilienceScoreTotalWeight += assessment.indicatorWeight;
+                }
+            });
+            this.resilienceScore = resilienceScoreSum / resilienceScoreTotalWeight;
         } else {
-            const tempAssessments: IAssessment[] = this.assessments.filter(
-                (assessment) => assessment.demoSite === demoSite && assessment.stakeHolderType === stakeHolderType
-            );
+            let tempAssessments: IAssessment[] = [];
+
+            if (stakeHolderType === 'anyStakeholderType') {
+                tempAssessments = this.assessments.filter((assessment) => assessment.demoSite === demoSite);
+            } else {
+                tempAssessments = this.assessments.filter(
+                    (assessment) => assessment.demoSite === demoSite && assessment.stakeHolderType === stakeHolderType
+                );
+            }
+
             let tempAssessments2: { [key: string]: IAssessment[] } = {};
 
             for (let assessment of tempAssessments) {
@@ -79,44 +97,70 @@ export class AssessmentsComponent implements OnInit {
                 }
             }
 
-            console.log(tempAssessments2);
+            if (metric === 'average') {
+                let resilienceScoreArray: Object[] = [];
+
+                Object.keys(tempAssessments2).forEach((key) => {
+                    const indicatorValue: number = mean(tempAssessments2[key].map((assessment: IAssessment) => assessment.normalized_value));
+                    const indicatorWeight: number = mean(tempAssessments2[key].map((assessment: IAssessment) => assessment.indicatorWeight));
+
+                    resilienceScoreArray.push({
+                        indicator: key,
+                        normalized_value: indicatorValue,
+                        indicatorWeight: indicatorWeight,
+                    });
+                });
+
+                let resilienceScoreSum = 0;
+                let resilienceScoreTotalWeight = 0;
+                resilienceScoreArray.forEach((assessment) => {
+                    resilienceScoreSum += assessment['normalized_value'] * assessment['indicatorWeight'];
+                    resilienceScoreTotalWeight += assessment['indicatorWeight'];
+                });
+                this.resilienceScore = resilienceScoreSum / resilienceScoreTotalWeight;
+            }
 
             Object.keys(tempAssessments2).forEach((key) => {
-                let values = tempAssessments2[key].map((assessment) => assessment.normalized_value);
-                let value = 0;
+                let values = tempAssessments2[key].map((assessment: IAssessment) => assessment.normalized_value);
+                let certaintyValues = tempAssessments2[key].map((assessment) => assessment.degreeOfCertainty);
+
+                let certaintyValue = 0;
+                let value: number;
+
                 switch (metric) {
                     case 'average':
                         value = mean(values);
-                        break;
-                    case 'median':
-                        value = median(values);
-                        break;
-                    case 'min':
-                        value = min(values);
-                        break;
-                    case 'max':
-                        value = max(values);
-                        break;
-                }
-
-                let certaintyValues = tempAssessments2[key].map((assessment) => assessment.degreeOfCertainty);
-                let certaintyValue = 0;
-                switch (metric) {
-                    case 'average':
                         certaintyValue = mean(certaintyValues);
                         break;
                     case 'median':
+                        value = median(values);
                         certaintyValue = median(certaintyValues);
                         break;
                     case 'min':
+                        value = min(values);
                         certaintyValue = min(certaintyValues);
                         break;
                     case 'max':
+                        value = max(values);
                         certaintyValue = max(certaintyValues);
                         break;
                 }
 
-                this.activeAssessments.push({ indicator: key, normalized_value: value, degreeOfCertainty: certaintyValue });
+                let is_inverseValues = tempAssessments2[key].map((assessment) => assessment.is_inverse);
+                let is_inverse = is_inverseValues.includes(true);
+                let alternative_description = '';
+                if (is_inverse) {
+                    let alternative_descriptions = tempAssessments2[key].map((assessment) => assessment.alternative_description);
+                    alternative_description = alternative_descriptions.filter((description) => description !== '')[0];
+                }
+
+                this.activeAssessments.push({
+                    indicator: key,
+                    normalized_value: value,
+                    degreeOfCertainty: certaintyValue,
+                    is_inverse: is_inverse,
+                    alternative_description: alternative_description,
+                });
             });
         }
 

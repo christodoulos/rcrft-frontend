@@ -33,6 +33,7 @@ export class QualitativeComponent implements OnInit {
         this.form = new FormGroup({
             normalizedValue: new FormControl(),
             degreeOfCertainty: new FormControl(),
+            indicatorWeight: new FormControl(),
         });
     }
 
@@ -42,6 +43,7 @@ export class QualitativeComponent implements OnInit {
             description: this.indicator.description,
             normalizedValue: this.form.value.normalizedValue,
             degreeOfCertainty: ((this.form.value.degreeOfCertainty - 1) * 5) / 4,
+            indicatorWeight: this.form.value.indicatorWeight / 5,
         };
 
         this.indicatorsService.newAssessment(data).subscribe((res) => {

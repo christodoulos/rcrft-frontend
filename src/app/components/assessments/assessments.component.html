@@ -28,6 +28,7 @@
                             <th>Alternative Name</th>
                             <th>Final Value</th>
                             <th>Degree Of Certainty</th>
+                            <th>Indicator Weight</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,6 +45,7 @@
                             <td class="text-center">{{ assessment.alternative_description != "" ? assessment.alternative_description : "-" }}</td>
                             <td class="text-center">{{ assessment.normalized_value.toFixed(3) }}</td>
                             <td class="text-center">{{ assessment.degreeOfCertainty }}</td>
+                            <td class="text-center">{{ assessment.indicatorWeight }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -81,7 +83,7 @@
                         <div class="my-3" *ngIf="!showOne.checked">
                             <p class="form-label text-center fs-5">Choose stakeholder type</p>
                             <select class="form-select w-95 mx-auto" formControlName="stakeHolderType">
-                                <option disabled class="text-center">Please select stakeholder type</option>
+                                <option class="text-center" selected value="anyStakeholderType">Any stakeholder type</option>
                                 <option
                                     *ngFor="let stakeHolderType of stakeHolderTypes"
                                     class="text-center"
@@ -108,10 +110,28 @@
             </div>
         </div>
 
-        <div class="row justify-content-center mt-5" *ngIf="showChart">
-            <div class="col-12 col-md-8">
+        <div class="text-center fs-2 my-3" *ngIf="resilienceScore !== -1 && showChart">
+            <p><span class="text-decoration-underline">Your resilience score is</span>: {{ resilienceScore.toFixed(3) }}</p>
+        </div>
+
+        <div class="row justify-content-around mt-5" *ngIf="showChart">
+            <div class="col-12 col-md-5">
                 <p class="text-center lead fs-2">Indicators Assessment</p>
-                <app-spider-chart *ngIf="activeAssessments.length" [assessments]="activeAssessments"></app-spider-chart>
+                <app-spider-chart
+                    *ngIf="activeAssessments.length"
+                    [assessments]="activeAssessments"
+                    [showDegreesOfCertainty]="false"
+                ></app-spider-chart>
+                <p *ngIf="!activeAssessments.length" class="text-center my-5 fs-3 fw-normal">No data available</p>
+            </div>
+
+            <div class="col-12 col-md-5">
+                <p class="text-center lead fs-2">Degrees of Certainty</p>
+                <app-spider-chart
+                    *ngIf="activeAssessments.length"
+                    [assessments]="activeAssessments"
+                    [showDegreesOfCertainty]="true"
+                ></app-spider-chart>
                 <p *ngIf="!activeAssessments.length" class="text-center my-5 fs-3 fw-normal">No data available</p>
             </div>
         </div>
