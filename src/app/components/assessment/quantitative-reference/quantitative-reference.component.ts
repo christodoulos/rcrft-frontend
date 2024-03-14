@@ -36,8 +36,8 @@ export class QuantitativeReferenceComponent {
             referenceValue: new FormControl('', [Validators.required, Validators.pattern(this.constService.NUMBER_REGEX)]),
             isInverse: new FormControl(false),
             alternativeTitle: new FormControl(''),
-            degreeOfCertainty: new FormControl(),
-            indicatorWeight: new FormControl(),
+            degreeOfCertainty: new FormControl<number>(3),
+            indicatorWeight: new FormControl<number>(1),
         });
     }
 
@@ -45,8 +45,8 @@ export class QuantitativeReferenceComponent {
         const data = {
             formType: 'quantitative-reference',
             description: this.indicator.description,
-            value: this.form.value.value,
-            referenceValue: this.form.value.referenceValue,
+            value: parseFloat(this.form.value.value),
+            referenceValue: parseFloat(this.form.value.referenceValue),
             isInverse: this.form.value.isInverse,
             alternativeTitle: this.form.value.alternativeTitle,
             normalizedValue: null,

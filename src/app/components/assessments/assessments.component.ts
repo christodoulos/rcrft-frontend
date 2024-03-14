@@ -169,4 +169,12 @@ export class AssessmentsComponent implements OnInit {
             this.showChart = true;
         }, 1);
     }
+
+    printResilienceScore(score: number): string {
+        if (score === -1 || isNaN(score)) {
+            return '-';
+        } else {
+            return score.toFixed(3);
+        }
+    }
 }

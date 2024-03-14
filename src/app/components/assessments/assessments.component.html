@@ -110,7 +110,7 @@
     </div>
 
     <div class="text-center fs-2 my-3" *ngIf="resilienceScore !== -1 && showChart">
-        <p><span class="text-decoration-underline">Your resilience score is</span>: {{ resilienceScore.toFixed(3) }}</p>
+        <p><span class="text-decoration-underline">Your resilience score is</span>: {{ printResilienceScore(resilienceScore) }}</p>
     </div>
 
     <div class="container">

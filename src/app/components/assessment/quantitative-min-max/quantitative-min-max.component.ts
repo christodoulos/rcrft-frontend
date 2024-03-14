@@ -38,8 +38,8 @@ export class QuantitativeMinMaxComponent {
             maxValue: new FormControl('', [Validators.required, Validators.pattern(this.constService.NUMBER_REGEX)]),
             isInverse: new FormControl(false),
             alternativeTitle: new FormControl(''),
-            degreeOfCertainty: new FormControl(),
-            indicatorWeight: new FormControl(),
+            degreeOfCertainty: new FormControl<number>(3),
+            indicatorWeight: new FormControl<number>(1),
         });
     }
 
@@ -47,9 +47,9 @@ export class QuantitativeMinMaxComponent {
         const data = {
             formType: 'quantitative-min-max',
             description: this.indicator.description,
-            value: this.form.value.value,
-            minValue: this.form.value.minValue,
-            maxValue: this.form.value.maxValue,
+            value: parseFloat(this.form.value.value),
+            minValue: parseFloat(this.form.value.minValue),
+            maxValue: parseFloat(this.form.value.maxValue),
             isInverse: this.form.value.isInverse,
             alternativeTitle: this.form.value.alternativeTitle,
             normalizedValue: null,

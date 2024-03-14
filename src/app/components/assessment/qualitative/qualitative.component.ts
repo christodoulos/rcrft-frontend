@@ -31,9 +31,9 @@ export class QualitativeComponent implements OnInit {
 
     ngOnInit(): void {
         this.form = new FormGroup({
-            normalizedValue: new FormControl(),
-            degreeOfCertainty: new FormControl(),
-            indicatorWeight: new FormControl(),
+            normalizedValue: new FormControl<number>(2.5),
+            degreeOfCertainty: new FormControl<number>(3),
+            indicatorWeight: new FormControl<number>(1),
         });
     }
 
