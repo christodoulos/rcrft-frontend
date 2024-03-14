@@ -1,11 +1,12 @@
 <app-backend-messages *ngIf="backendMessage" [message]="backendMessage"></app-backend-messages>
 
-<div class="card w-50 mx-auto mt-5" *ngIf="currentUser()">
+<h2 class="text-center fw-normal mt-5">User Profile</h2>
+
+<div class="container card mx-auto mt-5" *ngIf="currentUser()">
     <div class="card-body">
-        <div class="m-sm-3">
+        <div>
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                <h2 class="text-center fw-normal">User Profile</h2>
-                <div class="my-3">
+                <div class="my-3 row">
                     <p class="form-label text-center fs-5">Email</p>
                     <input readonly class="form-control text-center" type="text" [value]="currentUser().email" />
                 </div>
@@ -37,7 +38,6 @@
                         {{ stakeHolderType }}
                     </option>
                 </select>
-                <!-- Add a submit button -->
                 <button [disabled]="form.invalid" class="btn btn-primary w-100 mt-5" type="submit">Save</button>
             </form>
         </div>
