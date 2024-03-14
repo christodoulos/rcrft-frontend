@@ -113,17 +113,27 @@
         <p><span class="text-decoration-underline">Your resilience score is</span>: {{ resilienceScore.toFixed(3) }}</p>
     </div>
 
-    <div class="row justify-content-around mt-5" *ngIf="showChart">
-        <div class="col-12 col-md-5">
-            <p class="text-center lead fs-2">Indicators Assessment</p>
-            <app-spider-chart *ngIf="activeAssessments.length" [assessments]="activeAssessments" [showDegreesOfCertainty]="false"></app-spider-chart>
-            <p *ngIf="!activeAssessments.length" class="text-center my-5 fs-3 fw-normal">No data available</p>
-        </div>
+    <div class="container">
+        <div class="row justify-content-around mt-5" *ngIf="showChart">
+            <div class="col-12 col-md-6">
+                <p class="text-center lead fs-2">Indicators Assessment</p>
+                <app-spider-chart
+                    *ngIf="activeAssessments.length"
+                    [assessments]="activeAssessments"
+                    [showDegreesOfCertainty]="false"
+                ></app-spider-chart>
+                <p *ngIf="!activeAssessments.length" class="text-center my-5 fs-3 fw-normal">No data available</p>
+            </div>
 
-        <div class="col-12 col-md-5">
-            <p class="text-center lead fs-2">Degrees of Certainty</p>
-            <app-spider-chart *ngIf="activeAssessments.length" [assessments]="activeAssessments" [showDegreesOfCertainty]="true"></app-spider-chart>
-            <p *ngIf="!activeAssessments.length" class="text-center my-5 fs-3 fw-normal">No data available</p>
+            <div class="col-12 col-md-6">
+                <p class="text-center lead fs-2">Degrees of Certainty</p>
+                <app-spider-chart
+                    *ngIf="activeAssessments.length"
+                    [assessments]="activeAssessments"
+                    [showDegreesOfCertainty]="true"
+                ></app-spider-chart>
+                <p *ngIf="!activeAssessments.length" class="text-center my-5 fs-3 fw-normal">No data available</p>
+            </div>
         </div>
     </div>
 </div>
