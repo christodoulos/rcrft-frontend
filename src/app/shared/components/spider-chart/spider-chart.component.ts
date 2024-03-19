@@ -68,7 +68,7 @@ export class SpiderChartComponent implements OnInit {
         this.chartOptions = {
             series: this.series,
             chart: {
-                height: 500,
+                height: 700,
                 type: 'radar',
                 dropShadow: {
                     enabled: true,
