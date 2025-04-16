@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://rcrft-backend.ddns.net',
+    apiUrl: 'https://rcrft-backend.uwmh.eu',
 };
